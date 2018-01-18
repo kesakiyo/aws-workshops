@@ -145,7 +145,6 @@ exports.handler = (event, context, callback) => {
 ![serverless success test lambda](../images/serverless-success-test-lambda.png)
 
 6. DaynamoDB Comment 테이블에 새로운 항목이 생성이 된 것을 확인합니다.
-읽기 코드
 
 ### Lambda 나머지 함수 구현
 성공적으로 Create Lambda 함수를 구현했으면 나머지 Read, Update, Delete 함수의 구현은 쉽습니다. **나머지 Lambda 함수를 만드는 과정은 Create Lambda 함수를 만드는 과정과 정확히 일치합니다.** 차이점이 있다면 단지 코드뿐입니다. 아래는 나머니 세 기능에 대한 코드입니다.

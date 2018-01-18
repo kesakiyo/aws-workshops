@@ -67,7 +67,7 @@ CRUD를 할 수 있는 테이블이 생성됐습니다!! 이제 수동으로 데
 
 ![serverless create iam](../images/serverless-create-iam.png)
 
-3. "AWS 서비스" - "Lambda"를 선택한 뒤 "다음"을 클릭합ㄴ디ㅏ.
+3. "AWS 서비스" - "Lambda"를 선택한 뒤 "다음"을 클릭합니다.
 
 ![serverless select lambda iam](../images/serverless-select-lambda-iam.png)
 

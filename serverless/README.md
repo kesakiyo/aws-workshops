@@ -23,7 +23,7 @@
 
 > Amazon DynamoDB는 AWS에서 NoSQL 데이터베이스입니다. 또한 완전 관리형 클라우드 데이터베이스로 안정적인 성능을 기대할 수 있습니다. 자세한 설명은 [아마존 공식 문서](https://aws.amazon.com/dynamodb)를 참고해주세요.
 
-첫 번째로 설정해야 하는 부분은 Amazon DynamoDB입니다. 실습의 간단함을 위해 "id", "text" 두 개의 키를 가지는 "Comment" 테이블을 만들어 보겠습니다.
+첫 번째로 설정해야 하는 부분은 Amazon DynamoDB입니다. 간단한 실습을 위해 "id", "text" 두 개의 키를 가지는 "Comment" 테이블을 만들어 보겠습니다.
 
 ### DynamoDB 테이블 생성
 1. AWS 콘솔에서 Amazon DynamoDB를 선택합니다.
@@ -55,3 +55,14 @@ CRUD를 할 수 있는 테이블이 생성됐습니다!! 이제 수동으로 데
 6. 저장을 클릭합니다.
 
 새롭게 항목이 추가된 것을 확인할 수 있습니다. 동일한 방법으로 2~3개의 아이템을 더 추가해 보세요.
+
+## AWS Lambda
+> AWS는 서버를 프로비저닝하거나 관리할 필요 없이 코드 조각을 실행하는 서비스입니다. Lambda를 실행하기 위해서는 트리거를 설정해 줘야하는데 DynamoDB, API GateWay등 다양한 서비스들과의 인테그레이션을 제공합니다. 자세한 내용은 [아마존 공식 문서](https://aws.amazon.com/lambda)를 참고해 주세요.
+
+다음은 본 문서의 핵심 기능인 AWS Lambda 함수를 만드는 과정입니다. 이 순서에서는 총 네가지의 함수를 만듭니다. 각각의 함수는 Create, Read, Update, Delete 기능을 하게 됩니다. Lambda 함수를 만들기 전에 함수가 AWS 자원들에 접근할 수 있는 역할을 만들어 줘야 합니다.
+
+### IAM 역할 생성
+1. AWS 콘솔에서 IAM을 선택합니다.
+2. "역할" - "역할 만들기"를 차례로 클릭합니다.
+
+![serverless enter item dynamodb](../images/serverless-create-iam.png)

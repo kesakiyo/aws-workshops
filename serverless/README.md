@@ -15,4 +15,4 @@
 - Amazon DynamoDB
 - Amazon CloudFront
 
-![serverless select regeion](../images/serverless-select-regeion.png)
+![serverless select regeion|medium](../images/serverless-select-regeion.png)

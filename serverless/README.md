@@ -112,7 +112,7 @@ exports.handler = (event, context, callback) => {
     TableName : 'Comment',
   };
 
-  documentClient.put(params, (err, data) =>{
+  documentClient.put(params, (err, data) => {
     if (err) {
       return callback(err, null);
     }

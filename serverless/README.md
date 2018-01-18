@@ -29,10 +29,13 @@
 1. AWS 콘솔에서 Amazon DynamoDB를 선택합니다.
 2. "테이블 만들기"를 선택합니다.
 3. 테이블 이름은 "Comment", 기본 키는 "id"를 입력합니다. 그 외의 값은 기본값으로 설정합니다.
+
 ![serverless create dynamodb](../images/serverless-create-dynamodb.png)
+
 4. 생성을 클릭합니다.
 
 테이블 생성이 완료되면 활성 상태가 된 것을 확인합니다. 활성 상태가 되기까지 보통 수 초 이내에 완료됩니다. 활성 상태가 되면 아래 그림과 같이 초록색 글씨로 "활성"이 표시 됩니다.
+
 ![serverless create dynamodb](../images/serverless-active-dynamodb.png)
 
 CRUD를 할 수 있는 테이블이 생성됐습니다!! 이제 수동으로 데이터를 추가해 보겠습니다.

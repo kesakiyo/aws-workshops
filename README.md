@@ -9,4 +9,4 @@
 
 ## 폴더별 내용
 ### serverless
-AWS Lambda, Amazon API Gateway, Amazon DynamoDB, Amazon CloudFront를 이용해서 CRUD가 가능한 간단한 REST API를 설계하는 것을 목표로 합니다.
+AWS Lambda, Amazon API Gateway, Amazon DynamoDB를 이용해서 CRUD가 가능한 간단한 REST API를 설계하는 것을 목표로 합니다.

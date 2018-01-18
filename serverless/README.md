@@ -222,3 +222,5 @@ exports.handler = (event, context, callback) => {
   });
 };
 ```
+
+> Read, Update, Delete Lambda 함수를 성공적으로 작성했다면 Create 함수와 마찬가지로 테스트 케이스를 만들어 테스트를 합니다. 만약 코들르 잘못 입력해 동작하지 않는 것을 쉽게 찾아낼 수 있습니다.

@@ -48,7 +48,7 @@ CRUD를 할 수 있는 테이블이 생성됐습니다!! 이제 수동으로 데
 
 3. id는 1을 입력합니다.
 4. 왼쪽에 있는 "+"를 클릭한 뒤 "String"을 선택합니다.
-5. key값은 "text"를 입력하고 내용는 "hello dynamodb"를 입력합니다.
+5. key값은 "content"를 입력하고 내용는 "hello dynamodb"를 입력합니다.
 
 ![serverless enter item dynamodb](../images/serverless-enter-item-dynamodb.png)
 
@@ -107,7 +107,7 @@ exports.handler = (event, context, callback) => {
   const params = {
     Item : {
       id: uuid(),
-      text: event.text,
+      content: event.content,
     },
     TableName : 'Comment',
   };
@@ -134,7 +134,7 @@ exports.handler = (event, context, callback) => {
 
 ```javascript
 {
-  "text": "My first Lambda function!!"
+  "content": "My first Lambda function!!"
 }
 ```
 
@@ -146,7 +146,13 @@ exports.handler = (event, context, callback) => {
 
 6. DaynamoDB Comment 테이블에 새로운 항목이 생성이 된 것을 확인합니다.
 읽기 코드
+
+### Lambda 나머지 함수 구현
+성공적으로 Create Lambda 함수를 구현했으면 나머지 Read, Update, Delete 함수의 구현은 쉽습니다. **나머지 Lambda 함수를 만드는 과정은 Create Lambda 함수를 만드는 과정과 정확히 일치합니다.** 차이점이 있다면 단지 코드뿐입니다. 아래는 나머니 세 기능에 대한 코드입니다.
+
+#### Read Lambda 함수 코드
 ```javascript
+// Read Comments
 const AWS = require('aws-sdk');
 const documentClient = new AWS.DynamoDB.DocumentClient();
 const uuid = require('uuid/v4');
@@ -156,11 +162,64 @@ exports.handler = (event, context, callback) => {
     TableName : 'Comment',
   };
   documentClient.scan(params, (err, data) => {
-	  if(err) {
-		  return callback(err, null);
+    if(err) {
+      return callback(err, null);
     }
     callback(null, data.Items);
   });
 };
 ```
 
+#### Update Lambda 함수 코드
+```javascript
+// Update Comment
+const AWS = require('aws-sdk');
+const documentClient = new AWS.DynamoDB.DocumentClient();
+const uuid = require('uuid/v4');
+
+exports.handler = (event, context, callback) => {
+  const params = {
+    UpdateExpression: 'set content=:c',
+    ExpressionAttributeValues:{
+      ':c': event.content,
+    },
+    ReturnValues:"UPDATED_NEW",
+    Key: {
+      id: event.id,
+    },
+    TableName : 'Comment',
+  };
+
+  documentClient.update(params, (err, data) => {
+    if (err) {
+      return callback(err, null);
+    }
+    callback(null, data);
+  });
+};
+```
+
+#### Delete Lambda 함수 코드
+```javascript
+// Delete Comment
+const AWS = require('aws-sdk');
+const documentClient = new AWS.DynamoDB.DocumentClient();
+const uuid = require('uuid/v4');
+
+exports.handler = (event, context, callback) => {
+  const params = {
+    Key: {
+      id: event.id,
+    },
+    TableName : 'Comment',
+  };
+	
+  documentClient.delete(params, (err, data) => {
+    if (err) {
+      return callback(err, null);
+    }
+
+    callback(null, data);
+  });
+};
+```

@@ -66,3 +66,14 @@ CRUD를 할 수 있는 테이블이 생성됐습니다!! 이제 수동으로 데
 2. "역할" - "역할 만들기"를 차례로 클릭합니다.
 
 ![serverless enter item dynamodb](../images/serverless-create-iam.png)
+
+3. "AWS 서비스" - "Lambda"를 선택한 뒤 "다음"을 클릭합ㄴ디ㅏ.
+
+![serverless enter item dynamodb](../images/serverless-select-lambda-iam.png)
+
+4. AWSLambdaBasicExecutionRole, AmazonDynamoDBFullAccess를 검색해 선택합니다.
+5. 역할 이름은 lambda-iam 이라고 입력합니다. **정책 리스트에 4번에서 선택한 두 개가 있는지 확인합니다.**
+
+![serverless enter item dynamodb](../images/serverless-confirm-iam.png)
+
+6. 역할 만들기를 클릭합니다. 역할 리스트에서 lambda-iam 역할이 만들어진것을 확인합니다.

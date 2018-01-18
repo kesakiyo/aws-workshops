@@ -65,4 +65,97 @@ CRUD를 할 수 있는 테이블이 생성됐습니다!! 이제 수동으로 데
 1. AWS 콘솔에서 IAM을 선택합니다.
 2. "역할" - "역할 만들기"를 차례로 클릭합니다.
 
-![serverless enter item dynamodb](../images/serverless-create-iam.png)
+![serverless create iam](../images/serverless-create-iam.png)
+
+3. "AWS 서비스" - "Lambda"를 선택한 뒤 "다음"을 클릭합ㄴ디ㅏ.
+
+![serverless select lambda iam](../images/serverless-select-lambda-iam.png)
+
+4. AWSLambdaBasicExecutionRole, AmazonDynamoDBFullAccess를 검색해 선택합니다.
+5. 역할 이름은 lambda-iam 이라고 입력합니다. **정책 리스트에 4번에서 선택한 두 개가 있는지 확인합니다.**
+
+![serverless confirm iam](../images/serverless-confirm-iam.png)
+
+6. 역할 만들기를 클릭합니다. 역할 리스트에서 lambda-iam 역할이 만들어진것을 확인합니다.
+
+### Lambda 함수 생성
+
+성공적으로 IAM 역할을 만들었으면 DynamoDB를 조작하는 Lambda 함수를 만들 차례입니다.
+
+1. AWS 콘솔에서 AWS Lambda를 선택합니다.
+2. 함수 만들기를 클릭합니다.
+3. 함수 이름은 create-comment, 런타임은 Node.js 6.10, 역할은 전 순서에서 만들었던 lambda-iam을 선택합니다.
+
+![serverless create lambda](../images/serverless-create-lambda.png)
+
+4. 함수 생성을 클릭합니다.
+
+가장 기본적인 Lambda 함수를 만들었습니다!! 이제 여러분은 이 Lambda 함수를 이용해 DynamoDB에 FullAccess를 할 수 있습니다. 이제 이 Lambda 함수를 이용해 Comment를 생성하는 기능을 구현해 보겠습니다. 스크롤을 내이다 보면 중간쯤에 "함수 코드"라고 적혀져 있는 온라인 에디터를 볼 수 있습니다. 에디터에 아래 코드를 입력한 뒤 **우측 상단에 있는 "저장" 버튼을 클릭해주세요**
+
+```javascript
+// Create Comment
+const AWS = require('aws-sdk');
+const documentClient = new AWS.DynamoDB.DocumentClient();
+const uuid = require('uuid/v4');
+
+exports.handler = (event, context, callback) => {
+  const params = {
+    Item : {
+      id: uuid(),
+      text: event.text,
+    },
+    TableName : 'Comment',
+  };
+
+  documentClient.put(params, (err, data) =>{
+    if (err) {
+      return callback(err, null);
+    }
+  
+    callback(null, data.Item);
+  });
+};
+```
+
+> 간단한 실습을 위해 uuid 라이브러리를 사용해 id를 생성합니다. 실제 제품에서는 uuid를 id로 사용하지는 않습니다.
+
+### Lambda 테스트 작성
+코드 저장이 완료됐으면 우리가 생성한 Lambda function이 잘 동학하는지 테스트를 해 볼 차례입니다.
+
+1. 우측 상단에 있는 테스트 버튼을 클릭합니다.
+2. 적당한 테스트 이름을 입력하고 아래와 같이 테스트에 사용할 JSON 내용을 입력합니다.
+
+![serverless create test lambda](../images/serverless-create-test-lambda.png)
+
+```javascript
+{
+  "text": "My first Lambda function!!"
+}
+```
+
+3. "생성" 버튼을 클릭합니다.
+4. 테스트 생성이 완료되면 우측 상단에 있는 "테스트" 버튼을 눌러 테스트가 성공적으로 돌아가는지 확인합니다.
+5. 아래 그림과 같이 "성공" 키워드와 함께 토스트가 보인다면 Lambda 함수가 성공적으로 생성된 것입니다.
+
+![serverless success test lambda](../images/serverless-success-test-lambda.png)
+
+6. DaynamoDB Comment 테이블에 새로운 항목이 생성이 된 것을 확인합니다.
+읽기 코드
+```javascript
+const AWS = require('aws-sdk');
+const documentClient = new AWS.DynamoDB.DocumentClient();
+const uuid = require('uuid/v4');
+
+exports.handler = (event, context, callback) => {
+  const params = {
+    TableName : 'Comment',
+  };
+  documentClient.scan(params, (err, data) => {
+	  if(err) {
+		  return callback(err, null);
+    }
+    callback(null, data.Items);
+  });
+};
+```
+

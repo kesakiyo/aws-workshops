@@ -300,3 +300,15 @@ GET, POST, PUT, DELETE API를 생성하고 CORS설정까지 완료했다면 이�
 
 혹은 본 문서에 포함된 serverlessTester.zip 파일을 받아 압축을 푼 뒤 index.html을 실행해 여러분의 REST API가 제대로 동작을 하는지 확인해보세요.
 > 압축파일에 있는 index.html 파일과 bundle.js 파일이 한 폴더에 있어야 함을 주의하세요.
+
+
+## 마무리
+모든 실습이 끝났으면 생성했던 모든 자원을 삭제합니다. 만약 삭제하지 않을경우 **프리티어가 끝나고 과금**이 될 수 있음에 주의하세요.
+1. AWS Lambda의 create-comment, read-comment, update-comment, delete-comment 함수를 삭제합니다.
+2. Amazon DynamoDB의 Comment 테이블을 삭제합니다.
+3. Amazon API Gateway에 존재하는 lambda를 삭제합니다.
+4. IAM에 존재하는 lambda-iam을 삭제합니다.
+
+이상으로 이번 실습이 끝났습니다.
+
+감사합니다.

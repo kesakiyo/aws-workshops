@@ -284,3 +284,11 @@ GET, POST, PUT, DELETE API를 생성했다면 이제 배포를 해 접근 가능
 배포가 완료되면 아래와 같이 배포된 API Gateway에 접근할 수 있는 주소를 확인할 수 있습니다. 주소를 클릭해 GET요청으로 Amazon DynamoDB에 있는 Comment 데이터들이 정상적으로 불러와지는지 확인해보세요.
 
 ![serverless enter stage deploy](../images/serverless-complete-deploy.png)
+
+## API Test
+이제 여러분은 [id, text] 키를 가진 Comment 테이블에 CRUD를 하는 RestAPI 서버를 가지고 있습니다👏👏👏 
+
+남은 일은 여러분이 가진 REST API를 테스트 할 일입니다. REST API를 테스트 할 수 있는 방법은 여러가지가 있지만 가장 간단한 방법은 대중적으로 알려진 크롬 확장프로그램인 [Post man](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop)을 사용하는 방법입니다.
+
+혹은 본 문서에 포함된 CommentTester.zip 파일을 받아 압축을 푼 뒤 index.html을 실행해 여러분의 REST API가 제대로 동작을 하는지 확인해보세요.
+> 압축파일에 있는 index.html 파일과 bundle.js 파일이 한 폴더에 있어야 함을 주의하세요.

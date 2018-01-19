@@ -270,8 +270,16 @@ exports.handler = (event, context, callback) => {
 - PUT: update-comment
 - DELETE: update-comment
 
+### API CORS 생성
+다른 앱에서 REST API를 호출하기 위해서는 CORS 설정을 해줘야 합니다.
+
+1. 상단에 있는 "작업" - "CORS 활성화"를 클릭합니다.
+2. 우측의 "CORS 활성화 및 기존의 CORS 헤더 대체" 버튼을 클릭합니다.
+3. 확인창이 뜨면 "예" 버튼을 클릭합니다.
+4. CORS 설정이 완료됐다면 다음 단계로 넘어갑니다.
+
 ### API 배포
-GET, POST, PUT, DELETE API를 생성했다면 이제 배포를 해 접근 가능한 주소를 획득해야 합니다.
+GET, POST, PUT, DELETE API를 생성하고 CORS설정까지 완료했다면 이제 배포를 해 접근 가능한 주소를 획득해야 합니다.
 
 1. 상단에 있는 "작업" - "API 배포" 순으로 클릭합니다.
 2. 배포 스테이지에서 [새 스테이지]를 선택합니다.

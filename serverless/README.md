@@ -269,3 +269,18 @@ exports.handler = (event, context, callback) => {
 - POST: create-comment
 - PUT: update-comment
 - DELETE: update-comment
+
+### API 배포
+GET, POST, PUT, DELETE API를 생성했다면 이제 배포를 해 접근 가능한 주소를 획득해야 합니다.
+
+1. 상단에 있는 "작업" - "API 배포" 순으로 클릭합니다.
+2. 배포 스테이지에서 [새 스테이지]를 선택합니다.
+3. 스테이지 이름에 "prod"로 입력합니다.
+
+![serverless enter stage deploy](../images/serverless-enter-stage-deploy.png)
+
+4. "배포" 버튼을 클릭합니다.
+
+배포가 완료되면 아래와 같이 배포된 API Gateway에 접근할 수 있는 주소를 확인할 수 있습니다. 주소를 클릭해 GET요청으로 Amazon DynamoDB에 있는 Comment 데이터들이 정상적으로 불러와지는지 확인해보세요.
+
+![serverless enter stage deploy](../images/serverless-complete-deploy.png)

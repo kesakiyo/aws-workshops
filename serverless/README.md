@@ -23,7 +23,7 @@
 
 > Amazon DynamoDB는 AWS에서 NoSQL 데이터베이스입니다. 또한 완전 관리형 클라우드 데이터베이스로 안정적인 성능을 기대할 수 있습니다. 자세한 설명은 [아마존 공식 문서](https://aws.amazon.com/dynamodb)를 참고해주세요.
 
-첫 번째로 설정해야 하는 부분은 Amazon DynamoDB입니다. 간단한 실습을 위해 "id", "text" 두 개의 키를 가지는 "Comment" 테이블을 만들어 보겠습니다.
+첫 번째로 설정해야 하는 부분은 Amazon DynamoDB입니다. 간단한 실습을 위해 "id", "content" 두 개의 키를 가지는 "Comment" 테이블을 만들어 보겠습니다.
 
 ### DynamoDB 테이블 생성
 1. AWS 콘솔에서 Amazon DynamoDB를 선택합니다.

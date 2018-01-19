@@ -10,7 +10,7 @@
 ### 리전 선택
 실습에 앞서 AWS 콘솔의 우측 상단의 리전 드롭다운 메뉴에서 다음 서비스를 지원하는 리전을 선택합니다.
 
-(Seoul 리전은 위 서비스를 모두 지원합니다.)
+(본 워크샵에서는 다음 서비스를 모두 지원하는 Seoul 리전을 사용한다고 가정합니다.)
 
 - AWS Lambda
 - Amazon API Gateway
@@ -147,7 +147,13 @@ exports.handler = (event, context, callback) => {
 6. DaynamoDB Comment 테이블에 새로운 항목이 생성이 된 것을 확인합니다.
 
 ### Lambda 나머지 함수 구현
-성공적으로 Create Lambda 함수를 구현했으면 나머지 Read, Update, Delete 함수의 구현은 쉽습니다. **나머지 Lambda 함수를 만드는 과정은 Create Lambda 함수를 만드는 과정과 정확히 일치합니다.** 차이점이 있다면 단지 코드뿐입니다. 아래는 나머니 세 기능에 대한 코드입니다.
+성공적으로 Create Lambda 함수를 구현했으면 나머지 Read, Update, Delete 함수도 구현합니다. 함수 이름은 아래와 같습니다. 다음 순서인 Amazon API Gateway와 연결을 해줘야 하기 때문에 **함수 이름은 서로 구분이 되어야 합니다.**
+- Create Lambda 함수 이름: create-comment
+- Read Lambda 함수 이름: read-comment
+- Update Lambda 함수 이름: update-comment
+- Delete Lambda 함수 이름: delete-comment
+
+**나머지 Lambda 함수를 만드는 과정은 Create Lambda 함수를 만드는 과정과 정확히 일치합니다.** 차이점이 있다면 단지 코드뿐입니다. 아래는 나머니 세 기능에 대한 코드입니다.
 
 #### Read Lambda 함수 코드
 ```javascript
@@ -223,4 +229,43 @@ exports.handler = (event, context, callback) => {
 };
 ```
 
-> Read, Update, Delete Lambda 함수를 성공적으로 작성했다면 Create 함수와 마찬가지로 테스트 케이스를 만들어 테스트를 합니다. 만약 코들르 잘못 입력해 동작하지 않는 것을 쉽게 찾아낼 수 있습니다.
+> Read, Update, Delete Lambda 함수를 성공적으로 작성했다면 각각의 함수에 대해 테스트 케이스를 만들어 테스트를 해 봅니다. 코드를 잘못 입력해 Lambda 함수가 동작하지 않는 버그를 손쉽게 찾을 수 있습니다.
+
+## Amazon API Gateway
+> Amazon API Gateway는 누구든지 손쉽게 API를 생성, 관리 할 수 있게 해주는 서비스입니다. AWS Lambda에서 실행되는 코드, 또는 백엔드 서비스에 액세스 할 수 있게 해주는 역할을 합니다. 자세한 내용은 [아마존 공식 문서](https://aws.amazon.com/api-gateway)에서 확인하세요.
+
+
+### API Method 생성
+우리는 위 순서에서 CRUD가 가능한 AWS Lambda 함수들을 만들었습니다. 하지만 외부에서 AWS Lambda 함수를 실행시킬 방법이 현재 없습니다. 함수를 실행시키기 위해서는 어떠한 트리거가 있어야 하는데 본 워크샵에서는 그 역할을 Amazon API Gateway가 합니다.
+
+1. 새 API를 만드는 화면에 엑세스합니다. 만약 생성된 API가 하나도 없다면 "시작" 버튼을 클릭합니다.
+2. "새 API"를 선택하고 API 이름은 lambda로 입력합니다. 적당한 설명을 입력하고 그 외의 설정은 기본값을 유지합니다.
+
+![serverless create api](../images/serverless-create-api.png)
+
+3. "API 생성" 버튼을 클릭합니다.
+4. 상단에 있는 "작업" 버튼을 선택하고 "메서트 생성" 을 클릭합니다.
+
+![serverless select method](../images/serverless-select-method.png)
+
+5. "GET" 메서드를 선택하고 생성을 완료합니다.
+
+![serverless select get method](../images/serverless-select-get-method.png)
+
+6. 생성된 "GET" 메서드를 클릭해 통합유형, Lambda 리전, Lambda 함수 이름을 설정해줍니다. 그 외 설정은 기본값을 유지합니다.
+- 통합유형: Lambda 함수
+- Lambda 리전: ap-northeast-2
+- Lambda 함수: read-comment (혹 Read Comment Lambda 함수 이름을 문서와 다르게 설정했다면 그 이름을 입력해줍니다.)
+
+![serverless select get method](../images/serverless-set-get-method.png)
+
+7. 설정을 눌러 설정을 저장합니다. 추가 권한이 필요하다는 알림창이 나오면 확인을 누릅니다.
+
+"GET" 메서드 생성과 설정이 완료됐다면 이제 Read Lambda 함수를 실행할 준비가 됐습니다. 동일한 방법으로 **POST, PUT, DELETE** 메서드를 추가합니다. 다른 메스드를 추가하는 방법은 "GET" 메서드를 추가하는 방법과 거의 동일합니다. 
+
+단 하나 차이점이 있다면 메서드가 실행시킬 Lambda 함수 이름입니다. 각각의 메서드와 연결될 Lambda 함수 이름은 아래와 같습니다.
+
+- GET: read-comment
+- POST: create-comment
+- PUT: update-comment
+- DELETE: update-comment

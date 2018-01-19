@@ -298,7 +298,7 @@ GET, POST, PUT, DELETE API를 생성하고 CORS설정까지 완료했다면 이�
 
 남은 일은 여러분이 가진 REST API를 테스트 할 일입니다. REST API를 테스트 할 수 있는 방법은 여러가지가 있지만 가장 간단한 방법은 대중적으로 알려진 크롬 확장프로그램인 [Post man](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop)을 사용하는 방법입니다.
 
-혹은 본 문서에 포함된 [serverlessTester.zip](/kesakiyo/aws-workshops/raw/master/serverless/serverlessTester.zip) 파일을 받아 압축을 푼 뒤 index.html을 실행해 여러분의 REST API가 제대로 동작을 하는지 확인해보세요.
+혹은 본 문서에 포함된 [serverlessTester.zip](./serverlessTester.zip) 파일을 받아 압축을 푼 뒤 index.html을 실행해 여러분의 REST API가 제대로 동작을 하는지 확인해보세요.
 > 압축파일에 있는 index.html 파일과 bundle.js 파일이 한 폴더에 있어야 함을 주의하세요.
 
 

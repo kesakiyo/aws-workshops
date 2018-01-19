@@ -117,7 +117,7 @@ exports.handler = (event, context, callback) => {
       return callback(err, null);
     }
   
-    callback(null, data.Item);
+    callback(null, params.Item);
   });
 };
 ```
@@ -199,7 +199,7 @@ exports.handler = (event, context, callback) => {
     if (err) {
       return callback(err, null);
     }
-    callback(null, data);
+    callback(null, Object.assign({ id: event.id }, data.Attributes));
   });
 };
 ```

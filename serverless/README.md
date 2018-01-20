@@ -268,7 +268,7 @@ exports.handler = (event, context, callback) => {
 - GET: read-comment
 - POST: create-comment
 - PUT: update-comment
-- DELETE: update-comment
+- DELETE: delete-comment
 
 ### API CORS 생성
 다른 앱에서 REST API를 호출하기 위해서는 CORS 설정을 해줘야 합니다.
